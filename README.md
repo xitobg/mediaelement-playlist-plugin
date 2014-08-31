@@ -1,69 +1,125 @@
-mep-feature-playlist -  A playlist plugin for MediaElement.js
-=
-[Demo] (http://andrewberezovsky.ru/demo/backgroundaudio7/)
+#MediaElement.js Playlist Plugin for the Video and Audio Tag
 
-Usage:
+[>>> Here's a demo](http://www.roccogeorgi.com/demos/mediaelement-playlist-plugin/demo.html)
 
-1 - Download **[MediaElement.js] (http://mediaelementjs.com/)**
+##Intro 
 
-2 - Download **[mep-feature-playlist] (https://github.com/duozersk/mep-feature-playlist/archive/master.zip)**
+This MediaElement.js plugin provides playlist support for Video and Audio players.
+It was forked from duozersk/mep-feature-playlist, which is a fork of JeyKeu/mep-feature-playlist.
 
-3 - Include
+##tl;dr
 
-- **mediaelement-and-player.js**
-- **mediaelementplayer.min.css**
-- **mep-feature-playlist.js**
-- **mep-feature-playlist.css**
+- Add an attribute "data-showplaylist" with value "true" to video/audio tag to show playlist on start
+- Add several &lt;source&gt;s to your &lt;video&gt; or &lt;audio&gt; tags (only playable types will be playlisted)
+- Add features "playlistfeature" (loads library) and "playlist" (shows control icon) to .mediaelementplayer()
 
-4 - Add this code to your page:
 
-    <script>
-    $(function(){
-        $('audio,video').mediaelementplayer({
-            loop: true,
-            shuffle: true,
-            playlist: true,
-            audioHeight: 30,
-            playlistposition: 'bottom',
-            features: ['playlistfeature', 'prevtrack', 'playpause', 'nexttrack', 'loop', 'shuffle', 'playlist', 'current', 'progress', 'duration', 'volume'],
-        });
-    });
-    </script>
+##How To
 
-Options:
-- **loop** - loop through the playlist; defaults to 'false'
-- **shuffle** - shuffle playlist; defaults to 'false'
-- **playlist** - controls either to show playlist by default or not; defaults to 'false'
-- **playlistposition** - can be either 'top' or 'bottom' to show playlist on top of the player or under it; defaults to 'top'
+1. Download **[MediaElement.js](http://mediaelementjs.com/)**
 
-Features:
-- **playlistfeature** - general feature to enable playlist functionality; it just builds the internal playlist layer, it should be present if you want to use playlist
-- **prevtrack** - button to play the previous track in the playlist
-- **nexttrack** - button to play the next track in the playlist
-- **loop** - toggle to turn repeat on or off
-- **shuffle** - toggle to turn shuffle on or off
-- **playlist** - playlist button to show/hide playlist
+2. Download **[MediaElement Playlist Plugin](https://github.com/rocco/mediaelement-playlist-plugin/archive/master.zip)** (this repo)
 
-5 - Add the audio tag and your tracks:
+3. Include these files in your HTML
+    * **mediaelement-playlist-plugin.min.css**
+    * **mediaelement-playlist-plugin.min.js**
+    * **mediaelement-and-player.js**
+    * **mediaelementplayer.min.css**
 
-    <audio controls="controls" autoplay="autoplay">
-        <source src="media/AirReview-Landmarks-02-ChasingCorporate.mp3" title="Chasing Corporate" type="audio/mpeg"/>
-        <source src="media/framing.mp3" title="Framing" type="audio/mpeg"/>
+5. Add video / audio  and source tags like this in your HTML
+
+    ```html
+    <video 
+        data-showplaylist="true" 
+
+        width="530" 
+        height="300" 
+        poster="poster.png" 
+        >
+
+        <!-- Track 1 as .webm and .mp4 -->
+        <source src="track1.webm" type="video/webm" title="Track 1" data-poster="track1.png">
+        <source src="track1.mp4"  type="video/mp4"  title="Track 1" data-poster="track1.png">
+
+        <!-- Track 1 as .webm and .mp4 -->
+        <source src="track2.webm" type="video/webm" title="Track 2" data-poster="track2.png">
+        <source src="track2.mp4"  type="video/mp4"  title="Track 2" data-poster="track2.png">
+
+        <!-- Track 1 as .webm and .mp4 -->
+        <source src="track3.webm" type="video/webm" title="Track 3" data-poster="track3.png">
+        <source src="track3.mp4"  type="video/mp4"  title="Track 3" data-poster="track3.png">
+
+        <!-- image fallback only - flash version does not support playlists -->
+        <img src="no-video-playlist.png" title="No video playlist capabilities.">
+    </video>
+
+    <audio 
+        class="mep-slider" 
+        data-showplaylist="true" 
+        width="400" 
+        height="260" 
+        >
+        <source src="track1.mp3" title="Track 1" data-poster="track1.png" type="audio/mpeg">
+        <source src="track2.mp3" title="Track 2" data-poster="track2.png" type="audio/mpeg">
+        <source src="track3.mp3" title="Track 3" data-poster="track3.png" type="audio/mpeg">
+        <source src="track4.mp3" title="Track 4" data-poster="track4.png" type="audio/mpeg">
     </audio>
+    ```
 
-It will use title attribute as track name, falls back to file name if no title is specified.
+    Add a CSS class `mep-slider` to video- or audio tags if you want slider display.
+    The attribute `data-showplaylist="true"` shows the playlist initially.
+    Title attribute will be used as track name, falls back to file name.
 
-Screenshots
-==
-**Playlist Collapsed**
+6. Add something similar to this JavaScript code to your page
 
-![MediaElement.js Collapsed playlist](http://andrewberezovsky.ru/demo/screenshots/playlist_collapsed.png "MediaElement.js Collapsed playlist")
+    ```javascript
+    <script>
+        // video playlist
+        $('video.mep-playlist').mediaelementplayer({
+            "features": ['playlistfeature', 'prevtrack', 'playpause', 'nexttrack', 'loop', 'shuffle', 'current', 'progress', 'duration', 'volume', 'playlist', 'fullscreen'],
+            "shuffle": false,
+            "loop": false
+        });
 
-**Playlist Expanded**
+        // audio playlist
+        $('audio.mep-playlist').mediaelementplayer({
+            "features": ['playlistfeature', 'prevtrack', 'playpause', 'nexttrack', 'loop', 'shuffle', 'current', 'progress', 'duration', 'volume', 'playlist'],
+            "audioVolume": "vertical", // just like video player
+            "shuffle": false,
+            "loop": false
+        });
 
-![MediaElement.js Expanded playlist](http://andrewberezovsky.ru/demo/screenshots/playlist_expanded.png "MediaElement.js Expanded playlist")
+        // regular video
+        $('video:not(.mep-playlist)').mediaelementplayer({
+            "features": ['playpause', 'current', 'progress', 'duration', 'tracks', 'volume', 'fullscreen'],
+        });
+    </script>
+    ```
 
-- Yellow - playing track
-- Green - track to play on click
+    .mediaelementplayer() Options:
+    - **loop** - loop through the playlist; defaults to 'false'
+    - **shuffle** - shuffle playlist; defaults to 'false'
 
-More options and installation instructions related to MediaElement.js can be found [here] (http://mediaelementjs.com/#installation).
+    .mediaelementplayer() Features:
+    - **playlistfeature** - loads the plugin, needed if you want playlists
+    - **prevtrack** - button to play the previous track in the playlist
+    - **nexttrack** - button to play the next track in the playlist
+    - **loop** - toggle to turn repeat on or off
+    - **shuffle** - toggle to turn shuffle on or off
+    - **playlist** - playlist button to show/hide playlist
+
+
+##Main features
+
+- Regular playlist or slider display
+- Playlists are customizable via CSS/Sass
+- Grunt, Sass, JSHinted source
+
+##Build it yourself and contribute
+
+- make sure you `$ npm install` before you run `$ grunt`, sass is required too (`$ gem install sass`)
+- `$ grunt build:dev` stores a debuggable demo in _dev/
+- `$ grunt build` stores a minified demo in _build/
+- have a look at the demo.html files in either folder
+- run `$ grunt watch` or just `$ grunt` to work on the source efficiently
+- open/live-reload _dev/demo.html in browser
