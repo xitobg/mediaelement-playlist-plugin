@@ -10,8 +10,8 @@
 		<link type="text/css" rel="stylesheet" href="_demo/mediaelementplayer.css">
 
 		<!-- MediaElement Playlist Plugin -->
-		<script type="text/javascript" src="_demo/mediaelement-playlist-plugin.min.js"></script>
-		<link type="text/css" rel="stylesheet" href="_demo/mediaelement-playlist-plugin.min.css">
+		<script type="text/javascript" src="./mediaelement-playlist-plugin.js"></script>
+		<link type="text/css" rel="stylesheet" href="./mediaelement-playlist-plugin.css">
 
 		<style>
 			/* these are totally optional */
@@ -23,7 +23,7 @@
 
 			/* replace svg with our png - chrome 36 has issues with bg position and svg (play arrow invisible) */
 			.mejs-overlay-button {
-				background-image: url(_demo/bigplay.png);
+				background-image: url(./bigplay.png);
 			}
 
 			/* makes loader bg transparent, not black, we also supply a different loading gif in _demo/ */
@@ -110,7 +110,7 @@
 			<source src="http://blip.tv/file/get/Commonscreative-WiredNextMusic423.mov" type="video/quicktime"            title="Wired NextMusic by Creative Commons" data-poster="https://creativecommons.org/images/features/wired_nextmusic.jpg">
 
 			<!-- image fallback only - flash version does not support playlists -->
-			<img src="_demo/no-video-playlist.png" width="530" title="No video playlist capabilities. Please upgrade your browser!">
+			<img src="./no-video-playlist.png" width="530" title="No video playlist capabilities. Please upgrade your browser!">
 		</video>
 
 		<h2>Video playlist with slider</h2>
@@ -147,7 +147,7 @@
 			<source src="http://blip.tv/file/get/Commonscreative-WiredNextMusic423.mov" type="video/quicktime"            title="Wired NextMusic by Creative Commons" data-poster="https://creativecommons.org/images/features/wired_nextmusic.jpg">
 
 			<!-- image fallback only - flash version does not support playlists -->
-			<img src="_demo/no-video-playlist.png" width="530" title="No video playlist capabilities. Please upgrade your browser!">
+			<img src="./no-video-playlist.png" width="530" title="No video playlist capabilities. Please upgrade your browser!">
 		</video>
 		<p>
 			<ul>
@@ -205,13 +205,10 @@
 			preload="auto"
 			>
 
-			<source src="http://sampleswap.org/mp3/artist/harvestfred/harvestfred_-PRIMAVARA--320.mp3"         title="PRIMAVARA by harvestfred"                           data-poster="http://dummyimage.com/600x400/574c0d/e0e0e0&text=PRIMAVARA+by+harvestfred" type="audio/mpeg">
-			<source src="http://sampleswap.org/mp3/artist/fadortel/life-in-a-box_kalamata3-320.mp3"            title="kalamata_3 by life in a box"                        data-poster="http://dummyimage.com/600x400/801a80/e0e0e0&text=kalamata_3 by life in a box" type="audio/mpeg">
-			<source src="http://sampleswap.org/mp3/artist/robbot/robert-meyers_The-Magnificient-Escap-320.mp3" title="The Magnificient Escape 2009 EDIT by robert meyers" data-poster="http://dummyimage.com/600x400/80601b/e0e0e0&text=The+Magnificient+Escape+2009+EDIT+by+robert+meyers" type="audio/mpeg">
-			<source src="http://sampleswap.org/mp3/artist/brettml/Seed-AI_2D-320.mp3"                          title="2D by Seed A.I."                                    data-poster="http://dummyimage.com/600x400/1c1c80/e0e0e0&text=2D+by+Seed+A.I." type="audio/mpeg">
-			<source src="http://sampleswap.org/mp3/artist/Thrystero/Thrystero_Diagonal-320.mp3"                title="Diagonal by Thrystero"                              data-poster="http://dummyimage.com/600x400/741c80/e0e0e0&text=Diagonal+by+Thrystero" type="audio/mpeg">
-			<source src="http://sampleswap.org/mp3/artist/Akcija/Akcija_Trip-To-Your-Liver-320.mp3"            title="Trip To Your Liver by Akcija"                       data-poster="http://dummyimage.com/600x400/1c8028/e0e0e0&text=Trip+To+Your+Liver+by+Akcija" type="audio/mpeg">
-			<source src="http://sampleswap.org/mp3/artist/PaGaN/Alans-Lounge_No-More-Ballyhoo-320.mp3"         title="No More Ballyhoo by Alans Lounge"                   data-poster="http://dummyimage.com/600x400/27570d/e0e0e0&text=o+More+Ballyhoo+by+Alans+Lounge" type="audio/mpeg">
+			<source src="https://raw.githubusercontent.com/portablejim/example-media/master/Forward.mp3" title="RSF - Forward" data-poster="https://raw.githubusercontent.com/portablejim/example-media/master/forward_cover.jpg" type="audio/mpeg">
+			<source src="https://raw.githubusercontent.com/portablejim/example-media/master/LucaFrancini-Earth.mp3" title="Luca Francini - Earth" data-poster="https://raw.githubusercontent.com/portablejim/example-media/master/LucaFrancini-Earth_cover.jpg" type="audio/mpeg">
+			<source src="https://raw.githubusercontent.com/portablejim/example-media/master/LucaFrancini-EarthRemix.mp3" title="Luca Francini - Earth (Aly Elmasry Remix)" data-poster="https://raw.githubusercontent.com/portablejim/example-media/master/LucaFrancini-EarthRemix_cover.jpg" type="audio/mpeg">
+			<source src="https://raw.githubusercontent.com/portablejim/example-media/master/mother.mp3" title="Vaporia - To Mother" data-poster="https://raw.githubusercontent.com/portablejim/example-media/master/to-mother_artwork.jpg" type="audio/mpeg">
 
 		</audio>
 
@@ -226,17 +223,14 @@
 			preload="none"
 			>
 
-			<source src="http://sampleswap.org/mp3/artist/harvestfred/harvestfred_-PRIMAVARA--320.mp3"         title="PRIMAVARA by harvestfred"                           data-poster="http://dummyimage.com/600x400/574c0d/e0e0e0&text=PRIMAVARA+by+harvestfred" type="audio/mpeg">
-			<source src="http://sampleswap.org/mp3/artist/fadortel/life-in-a-box_kalamata3-320.mp3"            title="kalamata_3 by life in a box"                        data-poster="http://dummyimage.com/600x400/801a80/e0e0e0&text=kalamata_3 by life in a box" type="audio/mpeg">
-			<source src="http://sampleswap.org/mp3/artist/robbot/robert-meyers_The-Magnificient-Escap-320.mp3" title="The Magnificient Escape 2009 EDIT by robert meyers" data-poster="http://dummyimage.com/600x400/80601b/e0e0e0&text=The+Magnificient+Escape+2009+EDIT+by+robert+meyers" type="audio/mpeg">
-			<source src="http://sampleswap.org/mp3/artist/brettml/Seed-AI_2D-320.mp3"                          title="2D by Seed A.I."                                    data-poster="http://dummyimage.com/600x400/1c1c80/e0e0e0&text=2D+by+Seed+A.I." type="audio/mpeg">
-			<source src="http://sampleswap.org/mp3/artist/Thrystero/Thrystero_Diagonal-320.mp3"                title="Diagonal by Thrystero"                              data-poster="http://dummyimage.com/600x400/741c80/e0e0e0&text=Diagonal+by+Thrystero" type="audio/mpeg">
-			<source src="http://sampleswap.org/mp3/artist/Akcija/Akcija_Trip-To-Your-Liver-320.mp3"            title="Trip To Your Liver by Akcija"                       data-poster="http://dummyimage.com/600x400/1c8028/e0e0e0&text=Trip+To+Your+Liver+by+Akcija" type="audio/mpeg">
-			<source src="http://sampleswap.org/mp3/artist/PaGaN/Alans-Lounge_No-More-Ballyhoo-320.mp3"         title="No More Ballyhoo by Alans Lounge"                   data-poster="http://dummyimage.com/600x400/27570d/e0e0e0&text=o+More+Ballyhoo+by+Alans+Lounge" type="audio/mpeg">
+			<source src="https://raw.githubusercontent.com/portablejim/example-media/master/Forward.mp3" title="RSF - Forward" data-poster="https://raw.githubusercontent.com/portablejim/example-media/master/forward_cover.jpg" type="audio/mpeg">
+			<source src="https://raw.githubusercontent.com/portablejim/example-media/master/LucaFrancini-Earth.mp3" title="Luca Francini - Earth" data-poster="https://raw.githubusercontent.com/portablejim/example-media/master/LucaFrancini-Earth_cover.jpg" type="audio/mpeg">
+			<source src="https://raw.githubusercontent.com/portablejim/example-media/master/LucaFrancini-EarthRemix.mp3" title="Luca Francini - Earth (Aly Elmasry Remix)" data-poster="https://raw.githubusercontent.com/portablejim/example-media/master/LucaFrancini-EarthRemix_cover.jpg" type="audio/mpeg">
+			<source src="https://raw.githubusercontent.com/portablejim/example-media/master/mother.mp3" title="Vaporia - To Mother" data-poster="https://raw.githubusercontent.com/portablejim/example-media/master/to-mother_artwork.jpg" type="audio/mpeg">
 
 		</audio>
 		<p>
-			<a href="http://sampleswap.org/mp3/creative-commons/free-music.php">Music from sampleswap.org</a> under <a href="http://creativecommons.org/licenses/">various CC licenses</a>
+			Music Creative Commons under various licenses, <a href="https://github.com/portablejim/example-media">detailed here</a>
 		</p>
 
 		<script>
