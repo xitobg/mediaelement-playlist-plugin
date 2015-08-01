@@ -419,6 +419,15 @@
 				layers.children('.mejs-playlist').fadeOut();
 				t.playlistToggle.removeClass('mejs-hide-playlist').addClass('mejs-show-playlist');
 			}
+		},
+		oldSetPlayerSize: MediaElementPlayer.prototype.setPlayerSize,
+		setPlayerSize: function(width, height) {
+			// Ensure we are seen as a video while sizing.
+			// If audio, 100% sizing doesn't work.
+			var oldIsVideo = this.isVideo;
+			this.isVideo = true;
+			this.oldSetPlayerSize(width, height);
+			this.isVideo = oldIsVideo;
 		}
 	});
 
