@@ -11,10 +11,10 @@
     $.extend(MediaElementPlayer.prototype, {
         buildloop: function(player, controls, layers, media) {
             var t = this;
-            var loop = $('<div class="mejs-button mejs-loop-button ' + (player.options.loop ? "mejs-loop-on" : "mejs-loop-off") + '">' + '<button type="button" aria-controls="' + player.id + '" title="' + player.options.loopText + '"></button>' + "</div>").appendTo(controls).click(function() {
-                player.options.loop = !player.options.loop;
-                $(media).trigger("mep-looptoggle", [ player.options.loop ]);
-                if (player.options.loop) {
+            var loop = $('<div class="mejs-button mejs-loop-button ' + (player.options.loopplaylist ? "mejs-loop-on" : "mejs-loop-off") + '">' + '<button type="button" aria-controls="' + player.id + '" title="' + player.options.loopText + '"></button>' + "</div>").appendTo(controls).click(function() {
+                player.options.loopplaylist = !player.options.loopplaylist;
+                $(media).trigger("mep-looptoggle", [ player.options.loopplaylist ]);
+                if (player.options.loopplaylist) {
                     loop.removeClass("mejs-loop-off").addClass("mejs-loop-on");
                 } else {
                     loop.removeClass("mejs-loop-on").addClass("mejs-loop-off");
@@ -231,13 +231,15 @@
                 nxt = notplayed.eq(random);
             } else {
                 nxt = current.next();
-                if (nxt.length < 1 && t.options.loop) {
+                if (nxt.length < 1 && t.options.loopplaylist) {
                     nxt = current.siblings().first();
                 }
             }
+            t.options.loop = false;
             if (nxt.length == 1) {
                 nxt.addClass("played");
                 t.playTrack(nxt);
+                t.options.loop = true;
             }
         },
         playPrevTrack: function() {
@@ -254,7 +256,7 @@
                 prev = played.eq(random);
             } else {
                 prev = current.prev();
-                if (prev.length < 1 && t.options.loop) {
+                if (prev.length < 1 && t.options.loopplaylist) {
                     prev = current.siblings().last();
                 }
             }
