@@ -231,7 +231,7 @@
                 nxt = notplayed.eq(random);
             } else {
                 nxt = current.next();
-                if (nxt.length < 1 && t.options.loopplaylist) {
+                if (nxt.length < 1 && (t.options.loopplaylist || t.options.autoRewind)) {
                     nxt = current.siblings().first();
                 }
             }
@@ -239,7 +239,7 @@
             if (nxt.length == 1) {
                 nxt.addClass("played");
                 t.playTrack(nxt);
-                t.options.loop = true;
+                t.options.loop = t.options.loopplaylist;
             }
         },
         playPrevTrack: function() {
