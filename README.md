@@ -1,6 +1,6 @@
 #MediaElement.js Playlist Plugin for the Video and Audio Tag
 
-[>>> Here's a demo](portablejim.github.io/mediaelement-playlist-plugin/demo.html)
+[>>> Here's a demo](http://portablejim.github.io/mediaelement-playlist-plugin/demo.html)
 
 ##Intro 
 
