@@ -2,6 +2,7 @@
 <html>
 
 	<head>
+		<meta charset="UTF-8">
 		<title>MediaElement Playlist Plugin for Video and Audio Tag</title>
 
 		<!-- jQuery and MediaElement.js -->
@@ -10,8 +11,8 @@
 		<link type="text/css" rel="stylesheet" href="_demo/mediaelementplayer.css">
 
 		<!-- MediaElement Playlist Plugin -->
-		<script type="text/javascript" src="./mediaelement-playlist-plugin.js"></script>
-		<link type="text/css" rel="stylesheet" href="./mediaelement-playlist-plugin.css">
+		<script type="text/javascript" src="_demo/mediaelement-playlist-plugin.min.js"></script>
+		<link type="text/css" rel="stylesheet" href="_demo/mediaelement-playlist-plugin.min.css">
 
 		<style>
 			/* these are totally optional */
@@ -23,7 +24,7 @@
 
 			/* replace svg with our png - chrome 36 has issues with bg position and svg (play arrow invisible) */
 			.mejs-overlay-button {
-				background-image: url(./bigplay.png);
+				background-image: url(_demo/bigplay.png);
 			}
 
 			/* makes loader bg transparent, not black, we also supply a different loading gif in _demo/ */
@@ -110,7 +111,7 @@
 			<source src="http://blip.tv/file/get/Commonscreative-WiredNextMusic423.mov" type="video/quicktime"            title="Wired NextMusic by Creative Commons" data-poster="https://creativecommons.org/images/features/wired_nextmusic.jpg">
 
 			<!-- image fallback only - flash version does not support playlists -->
-			<img src="./no-video-playlist.png" width="530" title="No video playlist capabilities. Please upgrade your browser!">
+			<img src="_demo/no-video-playlist.png" width="530" title="No video playlist capabilities. Please upgrade your browser!">
 		</video>
 
 		<h2>Video playlist with slider</h2>
@@ -147,7 +148,7 @@
 			<source src="http://blip.tv/file/get/Commonscreative-WiredNextMusic423.mov" type="video/quicktime"            title="Wired NextMusic by Creative Commons" data-poster="https://creativecommons.org/images/features/wired_nextmusic.jpg">
 
 			<!-- image fallback only - flash version does not support playlists -->
-			<img src="./no-video-playlist.png" width="530" title="No video playlist capabilities. Please upgrade your browser!">
+			<img src="_demo/no-video-playlist.png" width="530" title="No video playlist capabilities. Please upgrade your browser!">
 		</video>
 		<p>
 			<ul>
@@ -245,10 +246,10 @@
 
 				// audio playlist
 				$('audio.mep-playlist').mediaelementplayer({
-					"features": ['playlistfeature', 'prevtrack', 'playpause', 'nexttrack', 'loop', 'shuffle', 'current', 'progress', 'duration', 'volume', 'playlist'],
+					"features": ['playlistfeature', 'prevtrack', 'playpause', 'nexttrack', 'loop', 'shuffle', 'current', 'progress', 'duration', 'volume', 'playlist', 'audiofullscreen'],
 					"audioVolume": "vertical", // just like video player
 					"shuffle": false,
-					"loop": true
+					"loopplaylist": true
 				});
 
 				// regular video
