@@ -2,6 +2,7 @@
 <html>
 
 	<head>
+		<meta charset="UTF-8">
 		<title>MediaElement Playlist Plugin for Video and Audio Tag</title>
 
 		<!-- jQuery and MediaElement.js -->
@@ -245,10 +246,10 @@
 
 				// audio playlist
 				$('audio.mep-playlist').mediaelementplayer({
-					"features": ['playlistfeature', 'prevtrack', 'playpause', 'nexttrack', 'loop', 'shuffle', 'current', 'progress', 'duration', 'volume', 'playlist'],
+					"features": ['playlistfeature', 'prevtrack', 'playpause', 'nexttrack', 'loop', 'shuffle', 'current', 'progress', 'duration', 'volume', 'playlist', 'audiofullscreen'],
 					"audioVolume": "vertical", // just like video player
 					"shuffle": false,
-					"loop": true
+					"loopplaylist": true
 				});
 
 				// regular video

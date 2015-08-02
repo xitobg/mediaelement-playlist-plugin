@@ -18,7 +18,8 @@
 		shuffleText: 'Shuffle On/Off',
 		nextText: 'Next Track',
 		prevText: 'Previous Track',
-		playlistText: 'Show/Hide Playlist'
+		playlistText: 'Show/Hide Playlist',
+		fullscreenText: 'Show/Hide Fulscreen'
 	});
 
 	$.extend(MediaElementPlayer.prototype, {
@@ -142,6 +143,35 @@
 		playlistToggleClick: function () {
 			var t = this;
 			t.playlistToggle.trigger('click');
+		},
+		//videoFullscreen: MediaElementPlayer.prototype.buildfullscreen,
+		buildaudiofullscreen: function(player, controls, layers, media) {
+			if(player.isVideo) {
+				// Fullscreen for video is already handled and is more complex.
+				//this.videoFullscreen();
+				return;
+			}
+
+			var t = this;
+
+			var fullscreenBtn =
+				$('<div class="mejs-button mejs-fullscreen-button">' +
+					'<button type="button" aria-controls="' + t.id + '" title="' + t.options.fullscreenText + '" aria-label="' + t.options.fullscreenText + '"></button>' +
+					'</div>');
+			fullscreenBtn.appendTo(controls);
+
+			if (t.media.pluginType === 'native' || (!t.options.usePluginFullScreen && !mejs.MediaFeatures.isFirefox)) {
+
+				fullscreenBtn.click(function() {
+					var isFullScreen = (mejs.MediaFeatures.hasTrueNativeFullScreen && mejs.MediaFeatures.isFullScreen()) || player.isFullScreen;
+
+					if (isFullScreen) {
+						player.exitFullScreen();
+					} else {
+						player.enterFullScreen();
+					}
+				});
+			}
 		},
 		// PLAYLIST WINDOW
 		buildplaylistfeature: function (player, controls, layers, media) {
