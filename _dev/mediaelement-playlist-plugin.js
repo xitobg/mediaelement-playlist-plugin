@@ -258,7 +258,7 @@
             if (nxt.length == 1) {
                 nxt.addClass("played");
                 t.playTrack(nxt);
-                t.options.loop = t.options.loopplaylist;
+                t.options.loop = t.options.loopplaylist || t.options.continuous;
             }
         },
         playPrevTrack: function() {
