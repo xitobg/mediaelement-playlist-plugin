@@ -175,7 +175,7 @@ module.exports = function (grunt) {
 				livereload : true
 			},
 			uglify: {
-				files: ['mediaelement-playlist-plugin.js'],
+				files: ['js/mediaelement-playlist-plugin.js'],
 				tasks: ['uglify:dev']
 			},
 			scss: {
