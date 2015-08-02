@@ -1,11 +1,15 @@
 #MediaElement.js Playlist Plugin for the Video and Audio Tag
 
-[>>> Here's a demo](http://www.roccogeorgi.com/demos/mediaelement-playlist-plugin/demo.html)
+[>>> Here's a demo](portablejim.github.io/mediaelement-playlist-plugin/demo.html)
 
 ##Intro 
 
-This MediaElement.js plugin provides playlist support for Video and Audio players.
-It was forked from duozersk/mep-feature-playlist, which is a fork of JeyKeu/mep-feature-playlist.
+This MediaElement.js plugin provides playlist support for Video and Audio players. Previous forks (from newest to oldest):
+
+  * rocco/mediaelement-playlist-plugin
+  * duozersk/mep-feature-playlist
+  * duozersk/mep-feature-playlist
+
 
 ##tl;dr
 
@@ -18,7 +22,7 @@ It was forked from duozersk/mep-feature-playlist, which is a fork of JeyKeu/mep-
 
 1. Download **[MediaElement.js](http://mediaelementjs.com/)**
 
-2. Download **[MediaElement Playlist Plugin](https://github.com/rocco/mediaelement-playlist-plugin/archive/master.zip)** (this repo)
+2. Download **[MediaElement Playlist Plugin](https://github.com/portablejim/mediaelement-playlist-plugin/archive/master.zip)** (this repo)
 
 3. Include these files in your HTML
     * **mediaelement-playlist-plugin.min.css**

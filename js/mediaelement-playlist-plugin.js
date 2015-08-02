@@ -3,7 +3,8 @@
 
 /**
  * @file MediaElement Playlist Feature (plugin).
- * @author Rocco Georgi <rocco@pavingways.com>
+ * @author James McKay <dcseee-github@yahoo.com.au>
+ * @author Original author: Rocco Georgi <rocco@pavingways.com>
  * Twitter handle: geeroc
  * @author Original author: Andrew Berezovsky <andrew.berezovsky@gmail.com>
  * Twitter handle: duozersk
