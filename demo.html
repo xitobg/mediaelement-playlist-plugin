@@ -6,13 +6,13 @@
 		<title>MediaElement Playlist Plugin for Video and Audio Tag</title>
 
 		<!-- jQuery and MediaElement.js -->
-		<script type="text/javascript" src="_demo/jquery-1.11.3.js"></script>
-		<script type="text/javascript" src="_demo/mediaelement-and-player.js"></script>
-		<link type="text/css" rel="stylesheet" href="_demo/mediaelementplayer.css">
+		<script type="text/javascript" src="lib/jquery-1.11.3.js"></script>
+		<script type="text/javascript" src="lib/mediaelement/mediaelement-and-player.js"></script>
+		<link type="text/css" rel="stylesheet" href="lib/mediaelement/mediaelementplayer.css">
 
 		<!-- MediaElement Playlist Plugin -->
-		<script type="text/javascript" src="_dev/mediaelement-playlist-plugin.js"></script>
-		<link type="text/css" rel="stylesheet" href="_dev/mediaelement-playlist-plugin.css">
+		<script type="text/javascript" src="build/mediaelement-playlist-plugin.js"></script>
+		<link type="text/css" rel="stylesheet" href="build/mediaelement-playlist-plugin.css">
 
 		<style>
 			/* these are totally optional */
@@ -24,7 +24,7 @@
 
 			/* replace svg with our png - chrome 36 has issues with bg position and svg (play arrow invisible) */
 			.mejs-overlay-button {
-				background-image: url(_demo/bigplay.png);
+				background-image: url(build/bigplay.png);
 			}
 
 			/* makes loader bg transparent, not black, we also supply a different loading gif in _demo/ */
@@ -81,9 +81,9 @@
 		<h2>Build it yourself and contribute</h2>
 		<ul>
 			<li>make sure you "npm install" before you run "grunt", sass is required too ("$ gem install sass")</li>
-			<li>"$ grunt build:dev" stores a debuggable demo in _dev/</li>
-			<li>"$ grunt build" stores a minified demo in _build/</li>
-			<li>have a look at the demo.html files in either folder</li>
+			<li>"$ grunt build:dev" stores a debuggable demo in build/</li>
+			<li>"$ grunt build" stores a minified demo in build/</li>
+			<li>have a look at the demo.html files for a demo</li>
 			<li>run "$ grunt watch" or just "$ grunt" to work efficiently</li>
 		</ul>
 </section>
@@ -132,7 +132,7 @@
 			<source src="http://blip.tv/file/get/Commonscreative-WiredNextMusic423.mov" type="video/quicktime"            title="Wired NextMusic by Creative Commons" data-poster="https://creativecommons.org/images/features/wired_nextmusic.jpg"/>
 
 			<!-- image fallback only - flash version does not support playlists -->
-			<img src="_demo/no-video-playlist.png" width="530" title="No video playlist capabilities. Please upgrade your browser!"/>
+			<img src="build/no-video-playlist.png" width="530" title="No video playlist capabilities. Please upgrade your browser!"/>
 		</video>
 
 		<h2>Video playlist with slider</h2>
@@ -169,7 +169,7 @@
 			<source src="http://blip.tv/file/get/Commonscreative-WiredNextMusic423.mov" type="video/quicktime"            title="Wired NextMusic by Creative Commons" data-poster="https://creativecommons.org/images/features/wired_nextmusic.jpg"/>
 
 			<!-- image fallback only - flash version does not support playlists -->
-			<img src="_demo/no-video-playlist.png" width="530" title="No video playlist capabilities. Please upgrade your browser!"/>
+			<img src="build/no-video-playlist.png" width="530" title="No video playlist capabilities. Please upgrade your browser!"/>
 		</video>
 		<p>
 			<ul>

@@ -122,8 +122,8 @@ This MediaElement.js plugin provides playlist support for Video and Audio player
 ##Build it yourself and contribute
 
 - make sure you `$ npm install` before you run `$ grunt`, sass is required too (`$ gem install sass`)
-- `$ grunt build:dev` stores a debuggable demo in _dev/
-- `$ grunt build` stores a minified demo in _build/
-- have a look at the demo.html files in either folder
+- `$ grunt build:dev` stores a debuggable demo in build/
+- `$ grunt build` stores a minified demo in build/
+- have a look at the demo.html files for a demo
 - run `$ grunt watch` or just `$ grunt` to work on the source efficiently
-- open/live-reload _dev/demo.html in browser
+- open/live-reload demo.html in browser
