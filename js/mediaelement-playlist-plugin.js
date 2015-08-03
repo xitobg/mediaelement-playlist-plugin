@@ -60,7 +60,7 @@
 		buildshuffle: function (player, controls, layers, media) {
 			var t = this;
 
-			var shuffle = $('<div class="mejs-button mejs-shuffle-button ' + ((player.options.shuffle) ? 'mejs-shuffle-on' : 'mejs-shuffle-off') + '">' +
+			var shuffle = $('<div class="mejs-button mejs-playlist-plugin-button mejs-shuffle-button ' + ((player.options.shuffle) ? 'mejs-shuffle-on' : 'mejs-shuffle-off') + '">' +
 				'<button type="button" aria-controls="' + player.id + '" title="' + player.options.shuffleText + '"></button>' +
 				'</div>')
 				// append it to the toolbar
@@ -86,7 +86,7 @@
 		buildprevtrack: function (player, controls, layers, media) {
 			var t = this;
 
-			var prevTrack = $('<div class="mejs-button mejs-prevtrack-button mejs-prevtrack">' +
+			var prevTrack = $('<div class="mejs-button mejs-playlist-plugin-button mejs-prevtrack-button mejs-prevtrack">' +
 				'<button type="button" aria-controls="' + player.id + '" title="' + player.options.prevText + '"></button>' +
 				'</div>');
 
@@ -107,7 +107,7 @@
 		buildnexttrack: function (player, controls, layers, media) {
 			var t = this;
 
-			var nextTrack = $('<div class="mejs-button mejs-nexttrack-button mejs-nexttrack">' +
+			var nextTrack = $('<div class="mejs-button mejs-playlist-plugin-button mejs-nexttrack-button mejs-nexttrack">' +
 				'<button type="button" aria-controls="' + player.id + '" title="' + player.options.nextText + '"></button>' +
 				'</div>');
 
@@ -129,7 +129,7 @@
 			var t = this;
 
 			// build playlist button
-			var playlistToggle = $('<div class="mejs-button mejs-playlist-button ' + ((player.options.playlist) ? 'mejs-hide-playlist' : 'mejs-show-playlist') + '">' +
+			var playlistToggle = $('<div class="mejs-button mejs-playlist-plugin-button mejs-playlist-button ' + ((player.options.playlist) ? 'mejs-hide-playlist' : 'mejs-show-playlist') + '">' +
 				'<button type="button" aria-controls="' + player.id + '" title="' + player.options.playlistText + '"></button>' +
 				'</div>');
 

@@ -1,3 +1,9 @@
+.svg, .no-svg {
+    .mejs-controls .mejs-playlist-plugin-button button {
+	    background-image: url('controls-playlist.png');
+	}
+}
+
 .mejs-controls {
 
 	.mejs-show-playlist button,
@@ -6,7 +12,7 @@
 	.mejs-nexttrack button,
 	.mejs-shuffle-on button,
 	.mejs-shuffle-off button {
-		background: transparent url(controls-playlist.png) no-repeat;
+		background: transparent url('controls-playlist.png') no-repeat;
 	}
 
 	.mejs-show-playlist button {
