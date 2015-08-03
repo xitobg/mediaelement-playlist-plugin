@@ -20,7 +20,7 @@
 		nextText: 'Next Track',
 		prevText: 'Previous Track',
 		playlistText: 'Show/Hide Playlist',
-		fullscreenText: 'Show/Hide Fulscreen'
+		fullscreenText: 'Show/Hide Fullscreen'
 	});
 
 	$.extend(MediaElementPlayer.prototype, {
