@@ -211,7 +211,7 @@
 			//$(media).children('source').each(function (index, element) { // doesn't work in Opera 12.12
 
 			$('#' + player.id).find('.mejs-mediaelement source').each(function () {
-				sourceIsPlayable = $(this).parent()[0].canPlayType(this.type);
+				sourceIsPlayable = $(this).parent()[0].player.media.canPlayType(this.type);
 				if (!foundMatchingType && (sourceIsPlayable === 'maybe' || sourceIsPlayable === 'probably')) {
 					foundMatchingType = this.type;
 				}
@@ -248,7 +248,7 @@
 			// set the first track as current
 			layers.find('li:first').addClass('current played');
 			// set initial poster image - only for audio playlists
-			if ($(player.media).is('audio')) {
+			if (!player.isVideo) {
 				player.changePoster(layers.find('li:first').data('poster'));
 			}
 			/* slider */
@@ -346,7 +346,7 @@
 				player.container.removeClass('mep-paused').addClass('mep-playing');
 
 				// hide playlist for videos
-				if ($(media).is('video')) {
+				if (player.isVideo) {
 					t.togglePlaylistDisplay(player, layers, media, 'hide');
 				}
 
@@ -354,7 +354,7 @@
 
 			/* mediaelement.js hides poster on "play" for all player types - not so great for audio */
 			media.addEventListener('play', function () {
-				if ($(player.media).is('audio')) {
+				if (!player.isVideo) {
 					layers.find('.mejs-poster').show();
 				}
 			}, false);
