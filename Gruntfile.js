@@ -122,11 +122,11 @@ module.exports = function (grunt) {
 				options: {
 					patterns: [
 						{
-							match: /_demo\/mediaelement-playlist-plugin.min.js/g,
+							match: /_dev\/mediaelement-playlist-plugin.js/g,
 							replacement: './mediaelement-playlist-plugin.js'
 						},
 						{
-							match: /_demo\/mediaelement-playlist-plugin.min.css/g,
+							match: /_dev\/mediaelement-playlist-plugin.css/g,
 							replacement: './mediaelement-playlist-plugin.css'
 						},
 						{
@@ -148,11 +148,11 @@ module.exports = function (grunt) {
 				options: {
 					patterns: [
 						{
-							match: /_dev\/mediaelement-playlist-plugin.min.js/g,
+							match: /_dev\/mediaelement-playlist-plugin.js/g,
 							replacement: './mediaelement-playlist-plugin.min.js'
 						},
 						{
-							match: /_dev\/mediaelement-playlist-plugin.min.css/g,
+							match: /_dev\/mediaelement-playlist-plugin.css/g,
 							replacement: './mediaelement-playlist-plugin.min.css'
 						},
 						{

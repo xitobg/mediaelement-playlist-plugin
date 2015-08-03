@@ -1,10 +1,14 @@
+.svg .mejs-controls .mejs-playlist-plugin-button button, .no-svg .mejs-controls .mejs-playlist-plugin-button button {
+  background-image: url("controls-playlist.png");
+}
+
 .mejs-controls .mejs-show-playlist button,
 .mejs-controls .mejs-hide-playlist button,
 .mejs-controls .mejs-prevtrack button,
 .mejs-controls .mejs-nexttrack button,
 .mejs-controls .mejs-shuffle-on button,
 .mejs-controls .mejs-shuffle-off button {
-  background: transparent url(controls-playlist.png) no-repeat;
+  background: transparent url("controls-playlist.png") no-repeat;
 }
 .mejs-controls .mejs-show-playlist button {
   /* Show/Hide Playlist */
@@ -47,9 +51,9 @@
   background-size: 100%;
   width: 100%;
   -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
   background-size: cover;
   background-position: 50% 50%;
 }
@@ -57,9 +61,9 @@
   margin: 0 0 30px 0;
   padding: 0;
   -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 .mejs-container .mejs-playlist ul li {
   margin: 0;
@@ -115,6 +119,7 @@
   overflow: hidden;
   white-space: nowrap;
   margin-bottom: 0 !important;
+  background: -webkit-radial-gradient(circle, grey, black);
   background: radial-gradient(circle, grey, black);
 }
 .mejs-container.mep-slider .mejs-playlist ul li {
@@ -122,8 +127,8 @@
   display: inline-block;
   width: 100%;
   will-change: transform;
-  transition: -webkit-transform 0.5s ease-in-out;
-  transition: transform 0.5s ease-in-out;
+  -webkit-transition: -webkit-transform 0.5s ease-in-out;
+          transition: transform 0.5s ease-in-out;
   background-size: 100%;
   background-repeat: no-repeat;
 }
@@ -181,9 +186,9 @@
 }
 .mejs-container.mep-slider .mejs-playlist > a.mep-prev {
   -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 .mejs-container.mep-slider .mejs-playlist > a.mep-prev:hover {
   background-position: left -500px;
@@ -192,9 +197,9 @@
   right: 0;
   background-position: left -600px;
   -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 .mejs-container.mep-slider .mejs-playlist > a.mep-next:hover {
   background-position: left -700px;

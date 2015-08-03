@@ -7,7 +7,7 @@
         nextText: "Next Track",
         prevText: "Previous Track",
         playlistText: "Show/Hide Playlist",
-        fullscreenText: "Show/Hide Fulscreen"
+        fullscreenText: "Show/Hide Fullscreen"
     });
     $.extend(MediaElementPlayer.prototype, {
         buildloop: function(player, controls, layers, media) {
@@ -29,7 +29,7 @@
         },
         buildshuffle: function(player, controls, layers, media) {
             var t = this;
-            var shuffle = $('<div class="mejs-button mejs-shuffle-button ' + (player.options.shuffle ? "mejs-shuffle-on" : "mejs-shuffle-off") + '">' + '<button type="button" aria-controls="' + player.id + '" title="' + player.options.shuffleText + '"></button>' + "</div>").appendTo(controls).click(function() {
+            var shuffle = $('<div class="mejs-button mejs-playlist-plugin-button mejs-shuffle-button ' + (player.options.shuffle ? "mejs-shuffle-on" : "mejs-shuffle-off") + '">' + '<button type="button" aria-controls="' + player.id + '" title="' + player.options.shuffleText + '"></button>' + "</div>").appendTo(controls).click(function() {
                 player.options.shuffle = !player.options.shuffle;
                 $(media).trigger("mep-shuffletoggle", [ player.options.shuffle ]);
                 if (player.options.shuffle) {
@@ -46,7 +46,7 @@
         },
         buildprevtrack: function(player, controls, layers, media) {
             var t = this;
-            var prevTrack = $('<div class="mejs-button mejs-prevtrack-button mejs-prevtrack">' + '<button type="button" aria-controls="' + player.id + '" title="' + player.options.prevText + '"></button>' + "</div>");
+            var prevTrack = $('<div class="mejs-button mejs-playlist-plugin-button mejs-prevtrack-button mejs-prevtrack">' + '<button type="button" aria-controls="' + player.id + '" title="' + player.options.prevText + '"></button>' + "</div>");
             prevTrack.appendTo(controls).click(function() {
                 $(media).trigger("mep-playprevtrack");
                 player.playPrevTrack();
@@ -59,7 +59,7 @@
         },
         buildnexttrack: function(player, controls, layers, media) {
             var t = this;
-            var nextTrack = $('<div class="mejs-button mejs-nexttrack-button mejs-nexttrack">' + '<button type="button" aria-controls="' + player.id + '" title="' + player.options.nextText + '"></button>' + "</div>");
+            var nextTrack = $('<div class="mejs-button mejs-playlist-plugin-button mejs-nexttrack-button mejs-nexttrack">' + '<button type="button" aria-controls="' + player.id + '" title="' + player.options.nextText + '"></button>' + "</div>");
             nextTrack.appendTo(controls).click(function() {
                 $(media).trigger("mep-playnexttrack");
                 player.playNextTrack();
@@ -72,7 +72,7 @@
         },
         buildplaylist: function(player, controls, layers, media) {
             var t = this;
-            var playlistToggle = $('<div class="mejs-button mejs-playlist-button ' + (player.options.playlist ? "mejs-hide-playlist" : "mejs-show-playlist") + '">' + '<button type="button" aria-controls="' + player.id + '" title="' + player.options.playlistText + '"></button>' + "</div>");
+            var playlistToggle = $('<div class="mejs-button mejs-playlist-plugin-button mejs-playlist-button ' + (player.options.playlist ? "mejs-hide-playlist" : "mejs-show-playlist") + '">' + '<button type="button" aria-controls="' + player.id + '" title="' + player.options.playlistText + '"></button>' + "</div>");
             playlistToggle.appendTo(controls).click(function() {
                 t.togglePlaylistDisplay(player, layers, media);
             });
@@ -119,7 +119,7 @@
             };
             var tracks = [], sourceIsPlayable, foundMatchingType = "";
             $("#" + player.id).find(".mejs-mediaelement source").each(function() {
-                sourceIsPlayable = $(this).parent()[0].canPlayType(this.type);
+                sourceIsPlayable = $(this).parent()[0].player.media.canPlayType(this.type);
                 if (!foundMatchingType && (sourceIsPlayable === "maybe" || sourceIsPlayable === "probably")) {
                     foundMatchingType = this.type;
                 }
@@ -148,7 +148,7 @@
             }
             player.videoSliderTracks = tracks.length;
             layers.find("li:first").addClass("current played");
-            if ($(player.media).is("audio")) {
+            if (!player.isVideo) {
                 player.changePoster(layers.find("li:first").data("poster"));
             }
             var $prevVid = $('<a class="mep-prev">'), $nextVid = $('<a class="mep-next">');
@@ -223,12 +223,12 @@
             }, false);
             media.addEventListener("playing", function() {
                 player.container.removeClass("mep-paused").addClass("mep-playing");
-                if ($(media).is("video")) {
+                if (player.isVideo) {
                     t.togglePlaylistDisplay(player, layers, media, "hide");
                 }
             }, false);
             media.addEventListener("play", function() {
-                if ($(player.media).is("audio")) {
+                if (!player.isVideo) {
                     layers.find(".mejs-poster").show();
                 }
             }, false);
@@ -245,6 +245,7 @@
                 current.removeClass("played").siblings().removeClass("played");
                 notplayed = tracks.not(".current");
             }
+            var atEnd = false;
             if (t.options.shuffle) {
                 var random = Math.floor(Math.random() * notplayed.length);
                 nxt = notplayed.eq(random);
@@ -252,13 +253,14 @@
                 nxt = current.next();
                 if (nxt.length < 1 && (t.options.loopplaylist || t.options.autoRewind)) {
                     nxt = current.siblings().first();
+                    atEnd = true;
                 }
             }
             t.options.loop = false;
             if (nxt.length == 1) {
                 nxt.addClass("played");
                 t.playTrack(nxt);
-                t.options.loop = t.options.loopplaylist || t.options.continuous;
+                t.options.loop = t.options.loopplaylist || t.options.continuous && !atEnd;
             }
         },
         playPrevTrack: function() {
