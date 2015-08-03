@@ -37,15 +37,6 @@
 			}
 
 		</style>
-		<style>
-			#intro, #forkme {
-				display: none;
-			}
-
-			#backbutton {
-				display: inherit;
-			}
-		</style>
 	</head>
 
 	<body>
@@ -61,36 +52,6 @@
 				<a href="index.html" class="button"><span>Back</span></a>
 			</section>
 
-			<section id="intro">
-		<p>
-			This MediaElement.js plugin provides playlist support for Video and Audio players.<br>
-			It was forked from <a href="https://github.com/duozersk/mep-feature-playlist">duozersk/mep-feature-playlist</a>, which is a fork of <a href="https://github.com/JeyKeu/mep-feature-playlist">JeyKeu/mep-feature-playlist</a>.
-		</p>
-
-		<h2>How it works</h2>
-		<ol>
-			<li>Add a CSS class "mep-playlist" to your &lt;video&gt; or &lt;audio&gt; tag</li>
-			<li>Add an attribute "data-showplaylist" with value "true" to show playlist on start</li>
-			<li>Add features "playlistfeature" (loads library) and "playlist" (shows control icon)</li>
-			<li>Add several &lt;source&gt;s to your &lt;video&gt; or &lt;audio&gt; tags (only playable types will be playlisted)</li>
-		</ol>
-
-		<h2>Main features</h2>
-		<ul>
-			<li>Regular playlist or slider display</li>
-			<li>Playlists are customizable via CSS/Sass</li>
-			<li>Grunt, Sass, JSHinted source</li>
-		</ul>
-
-		<h2>Build it yourself and contribute</h2>
-		<ul>
-			<li>make sure you "npm install" before you run "grunt", sass is required too ("$ gem install sass")</li>
-			<li>"$ grunt build:dev" stores a debuggable demo in build/</li>
-			<li>"$ grunt build" stores a minified demo in build/</li>
-			<li>have a look at the demo.html files for a demo</li>
-			<li>run "$ grunt watch" or just "$ grunt" to work efficiently</li>
-		</ul>
-</section>
 			<section id="main_content">
 		<!-- 
 		reminder: video tag standard attribute values: 
@@ -136,7 +97,7 @@
 			<source src="http://blip.tv/file/get/Commonscreative-WiredNextMusic423.mov" type="video/quicktime"            title="Wired NextMusic by Creative Commons" data-poster="https://creativecommons.org/images/features/wired_nextmusic.jpg"/>
 
 			<!-- image fallback only - flash version does not support playlists -->
-			<img src="build/no-video-playlist.png" width="530" title="No video playlist capabilities. Please upgrade your browser!"/>
+			<img src="build/no-video-playlist.png" width="530" title="No video playlist capabilities. Please upgrade your browser!" alt=""/>
 		</video>
 
 		<h2>Video playlist with slider</h2>
@@ -173,16 +134,16 @@
 			<source src="http://blip.tv/file/get/Commonscreative-WiredNextMusic423.mov" type="video/quicktime"            title="Wired NextMusic by Creative Commons" data-poster="https://creativecommons.org/images/features/wired_nextmusic.jpg"/>
 
 			<!-- image fallback only - flash version does not support playlists -->
-			<img src="build/no-video-playlist.png" width="530" title="No video playlist capabilities. Please upgrade your browser!"/>
+			<img src="build/no-video-playlist.png" width="530" title="No video playlist capabilities. Please upgrade your browser!" alt=""/>
 		</video>
-		<p>
+		<div>
 			<ul>
 				<li><a href="https://creativecommons.org/videos/mayer-and-bettle">Mayer and Bettle</a> by Creative Commons Australia and <a href="http://blackbrow.com/">Black Brow</a> under <a href="http://creativecommons.org/licenses/by-sa/2.0/au/"><img alt="CC license" src="http://i.creativecommons.org/l/by-sa/2.0/au/88x31.png" width="88" height="31"></a></li>
 				<li><a href="https://creativecommons.org/videos/wanna-work-together">Wanna Work Together?</a> by Creative Commons under <a href="http://creativecommons.org/licenses/by/2.5/"><img alt="CC license" src="http://i.creativecommons.org/l/by/2.5/88x31.png" width="88" height="31"></a></li>
 				<li><a href="https://creativecommons.org/videos/reticulum-rex">Reticulum Rex</a> by Creative Commons under <a href="http://creativecommons.org/licenses/by-sa/1.0/"><img alt="CC license" src="http://i.creativecommons.org/l/by-sa/1.0/88x31.png" width="88" height="31"></a></li>
 				<li><a href="https://creativecommons.org/videos/wired-nextmusic">Wired NextMusic</a> by Creative Commons under <a href="http://creativecommons.org/licenses/by/3.0/"><img alt="CC license" src="http://i.creativecommons.org/l/by/3.0/88x31.png" width="88" height="31"></a></li>
 			</ul>
-		</p>
+		</div>
 
 
 		<h2>Regular Video</h2>
@@ -212,7 +173,7 @@
 				<param name="flashvars" value="controls=true&autoplay=true&loop=true&file=video/video2.mp4">
 
 				<!-- image fallback -->
-				<img src="https://creativecommons.org/images/features/past.jpg" width="320" title="No video playback capabilities"/>
+				<img src="https://creativecommons.org/images/features/past.jpg" width="320" title="No video playback capabilities" alt=""/>
 			</object>
 		</video>
 		<p>
@@ -285,10 +246,8 @@
 			});
 		</script>
 			</section>
-
-		<section id="forkme">
-			<a href="https://github.com/rocco/mediaelement-playlist-plugin/"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
-		</section>
+			</div>
+		</div>
 
 	</body>
 </html>
