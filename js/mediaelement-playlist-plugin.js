@@ -374,6 +374,7 @@
 				current.removeClass('played').siblings().removeClass('played');
 				notplayed = tracks.not('.current');
 			}
+			var atEnd = false;
 			if (t.options.shuffle) {
 				var random = Math.floor(Math.random() * notplayed.length);
 				nxt = notplayed.eq(random);
@@ -381,13 +382,14 @@
 				nxt = current.next();
 				if (nxt.length < 1 && (t.options.loopplaylist || t.options.autoRewind)) {
 					nxt = current.siblings().first();
+					atEnd = true;
 				}
 			}
 			t.options.loop = false;
 			if (nxt.length == 1) {
 				nxt.addClass('played');
 				t.playTrack(nxt);
-				t.options.loop = t.options.loopplaylist || t.options.continuous;
+				t.options.loop = t.options.loopplaylist || (t.options.continuous && !atEnd);
 			}
 		},
 		playPrevTrack: function () {
