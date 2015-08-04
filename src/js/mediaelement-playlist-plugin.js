@@ -211,6 +211,19 @@
 			//$(media).children('source').each(function (index, element) { // doesn't work in Opera 12.12
 
 			$('#' + player.id).find('.mejs-mediaelement source').each(function () {
+
+				// Determine location of canPlayType. There is probably a better way to do this.
+				if($(this).parent()[0] && $(this).parent()[0].canPlayType) {
+					sourceIsPlayable = $(this).parent()[0].canPlayType(this.type)
+				}
+				else if($(this).parent()[0] && $(this).parent()[0].player
+					&& $(this).parent()[0].player.media && $(this).parent()[0].player.media.canPlayType) {
+					sourceIsPlayable = $(this).parent()[0].player.media.canPlayType(this.type);
+				}
+				else {
+					console.error("Cannot determine if we can play this media (no canPlayType()) on" + $(this).toString());
+				}
+
 				sourceIsPlayable = $(this).parent()[0].player.media.canPlayType(this.type);
 				if (!foundMatchingType && (sourceIsPlayable === 'maybe' || sourceIsPlayable === 'probably')) {
 					foundMatchingType = this.type;

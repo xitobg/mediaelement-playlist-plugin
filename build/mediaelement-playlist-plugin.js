@@ -119,7 +119,16 @@
             };
             var tracks = [], sourceIsPlayable, foundMatchingType = "";
             $("#" + player.id).find(".mejs-mediaelement source").each(function() {
-                sourceIsPlayable = $(this).parent()[0].player.media.canPlayType(this.type);
+                if($(this).parent()[0] && $(this).parent()[0].canPlayType) {
+                    sourceIsPlayable = $(this).parent()[0].canPlayType(this.type)
+                }
+                else if($(this).parent()[0] && $(this).parent()[0].player
+                    && $(this).parent()[0].player.media && $(this).parent()[0].player.media.canPlayType) {
+                    sourceIsPlayable = $(this).parent()[0].player.media.canPlayType(this.type);
+                }
+                else {
+                    console.error("Cannot determine if we can play this media (no canPlayType()) on" + $(this).toString());
+                }
                 if (!foundMatchingType && (sourceIsPlayable === "maybe" || sourceIsPlayable === "probably")) {
                     foundMatchingType = this.type;
                 }
