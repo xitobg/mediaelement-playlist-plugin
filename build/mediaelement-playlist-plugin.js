@@ -98,6 +98,37 @@
                         player.enterFullScreen();
                     }
                 });
+            } else {
+                var fullscreenClass = "manual-fullscreen";
+                fullscreenBtn.click(function() {
+                    var isFullscreen = player.container.hasClass(fullscreenClass);
+                    if (isFullscreen) {
+                        $(document.body).removeClass(fullscreenClass);
+                        player.container.removeClass(fullscreenClass);
+                        player.resetSize();
+                        t.isFullScreen = false;
+                    } else {
+                        t.normalHeight = t.container.height();
+                        t.normalWidth = t.container.width();
+                        $(document.body).addClass(fullscreenClass);
+                        player.container.addClass(fullscreenClass);
+                        t.container.css({
+                            width: "100%",
+                            height: "100%"
+                        });
+                        player.layers.children().css("width", "100%").css("height", "100%");
+                        t.containerSizeTimeout = setTimeout(function() {
+                            t.container.css({
+                                width: "100%",
+                                height: "100%"
+                            });
+                            player.layers.children().css("width", "100%").css("height", "100%");
+                            t.setControlsSize();
+                        }, 500);
+                        player.setControlsSize();
+                        t.isFullScreen = true;
+                    }
+                });
             }
         },
         buildplaylistfeature: function(player, controls, layers, media) {
@@ -119,16 +150,14 @@
             };
             var tracks = [], sourceIsPlayable, foundMatchingType = "";
             $("#" + player.id).find(".mejs-mediaelement source").each(function() {
-                if($(this).parent()[0] && $(this).parent()[0].canPlayType) {
-                    sourceIsPlayable = $(this).parent()[0].canPlayType(this.type)
-                }
-                else if($(this).parent()[0] && $(this).parent()[0].player
-                    && $(this).parent()[0].player.media && $(this).parent()[0].player.media.canPlayType) {
+                if ($(this).parent()[0] && $(this).parent()[0].canPlayType) {
+                    sourceIsPlayable = $(this).parent()[0].canPlayType(this.type);
+                } else if ($(this).parent()[0] && $(this).parent()[0].player && $(this).parent()[0].player.media && $(this).parent()[0].player.media.canPlayType) {
                     sourceIsPlayable = $(this).parent()[0].player.media.canPlayType(this.type);
-                }
-                else {
+                } else {
                     console.error("Cannot determine if we can play this media (no canPlayType()) on" + $(this).toString());
                 }
+                sourceIsPlayable = $(this).parent()[0].player.media.canPlayType(this.type);
                 if (!foundMatchingType && (sourceIsPlayable === "maybe" || sourceIsPlayable === "probably")) {
                     foundMatchingType = this.type;
                 }

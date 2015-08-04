@@ -172,6 +172,31 @@
 						player.enterFullScreen();
 					}
 				});
+			} else {
+				var fullscreenClass = "manual-fullscreen";
+				fullscreenBtn.click(function() {
+					var isFullscreen = player.container.hasClass(fullscreenClass);
+					if (isFullscreen) {
+						$(document.body).removeClass(fullscreenClass);
+						player.container.removeClass(fullscreenClass);
+						player.resetSize();
+						t.isFullScreen = false;
+					} else {
+						t.normalHeight = t.container.height();
+						t.normalWidth = t.container.width();
+						$(document.body).addClass(fullscreenClass);
+						player.container.addClass(fullscreenClass);
+						t.container.css({width: '100%', height: '100%'});
+						player.layers.children().css("width", "100%").css("height", "100%");
+						t.containerSizeTimeout = setTimeout(function() {
+							t.container.css({width: '100%', height: '100%'});
+							player.layers.children().css("width", "100%").css("height", "100%");
+							t.setControlsSize();
+						}, 500);
+						player.setControlsSize();
+						t.isFullScreen = true;
+					}
+				});
 			}
 		},
 		// PLAYLIST WINDOW
