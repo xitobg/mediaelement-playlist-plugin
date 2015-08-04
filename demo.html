@@ -4,6 +4,8 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>MediaElement Playlist Plugin for Video and Audio Tag</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
 		<link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" type="text/css" href="demo/stylesheets/stylesheet.css" media="screen">
 		<link rel="stylesheet" type="text/css" href="demo/stylesheets/pygment_trac.css" media="screen">
@@ -65,16 +67,16 @@
 		-->
 
 		<h2>Video playlist with default display</h2>
+				<div>
 		<video
 			class="mep-playlist"
 			data-showplaylist="true"
 
-			width="530"
-			height="300"
 			poster="https://creativecommons.org/images/features/mayerandbettle.jpg"
 			controls="controls"
 			preload="auto"
 			loop=""
+			style="max-width: 100%;"
 			>
 			<!-- Mayer and Bettle by Creative Commons Australia -->
 			<source src="http://mirrors.creativecommons.org/movingimages/webm/MayerandBettle_480p.webm" type="video/webm"      title="Mayer and Bettle by Creative Commons Australia" data-poster="https://creativecommons.org/images/features/mayerandbettle.jpg"/>
@@ -99,18 +101,18 @@
 			<!-- image fallback only - flash version does not support playlists -->
 			<img src="build/no-video-playlist.png" width="530" title="No video playlist capabilities. Please upgrade your browser!" alt=""/>
 		</video>
-
+</div>
 		<h2>Video playlist with slider</h2>
+				<div>
 		<video
 			class="mep-playlist mep-slider"
 			data-showplaylist="true"
 
-			width="530"
-			height="300"
 			poster="https://creativecommons.org/images/features/mayerandbettle.jpg"
 			controls="controls"
 			preload="auto"
 			loop=""
+			style="max-width: 100%;"
 			>
 
 			<!-- Mayer and Bettle by Creative Commons Australia -->
@@ -136,6 +138,7 @@
 			<!-- image fallback only - flash version does not support playlists -->
 			<img src="build/no-video-playlist.png" width="530" title="No video playlist capabilities. Please upgrade your browser!" alt=""/>
 		</video>
+				</div>
 		<div>
 			<ul>
 				<li><a href="https://creativecommons.org/videos/mayer-and-bettle">Mayer and Bettle</a> by Creative Commons Australia and <a href="http://blackbrow.com/">Black Brow</a> under <a href="http://creativecommons.org/licenses/by-sa/2.0/au/"><img alt="CC license" src="http://i.creativecommons.org/l/by-sa/2.0/au/88x31.png" width="88" height="31"></a></li>
@@ -151,12 +154,11 @@
 			Regular videos use the same visuals as playlists. Customizable via CSS.
 		</p>
 		<video
-			width="530"
-			height="300"
 			poster="https://creativecommons.org/images/features/past.jpg"
 			controls="controls"
 			preload="auto"
 			loop="loop"
+			style="max-width: 100%;"
 			>
 
 			<source src="http://mirrors.creativecommons.org/movingimages/webm/BuildingonthePast_480p.webm" type="video/webm"/>
@@ -186,10 +188,9 @@
 			class="mep-playlist"
 			data-showplaylist="true"
 
-			width="400"
-			height="220"
 			controls="controls"
 			preload="auto"
+			style="max-width: 100%;"
 			>
 
 			<source src="https://raw.githubusercontent.com/portablejim/example-media/master/Forward.mp3" title="RSF - Forward" data-poster="https://raw.githubusercontent.com/portablejim/example-media/master/forward_cover.jpg" type="audio/mpeg"/>
@@ -203,11 +204,9 @@
 		<audio
 			class="mep-playlist mep-slider"
 			data-showplaylist="true"
-
-			width="400"
-			height="260"
 			controls="controls"
 			preload="none"
+			style="max-width: 100%; height: 100%"
 			>
 
 			<source src="https://raw.githubusercontent.com/portablejim/example-media/master/Forward.mp3" title="RSF - Forward" data-poster="https://raw.githubusercontent.com/portablejim/example-media/master/forward_cover.jpg" type="audio/mpeg"/>
@@ -227,7 +226,8 @@
 				$('video.mep-playlist').mediaelementplayer({
 					"features": ['playlistfeature', 'prevtrack', 'playpause', 'nexttrack', 'loop', 'shuffle', 'current', 'progress', 'duration', 'volume', 'playlist', 'fullscreen'],
 					"shuffle": false,
-					"loop": false
+					"loop": false,
+					"aspectratio": "16:9"
 				});
 
 				// audio playlist
@@ -235,12 +235,14 @@
 					"features": ['playlistfeature', 'prevtrack', 'playpause', 'nexttrack', 'loop', 'shuffle', 'current', 'progress', 'duration', 'volume', 'playlist', 'audiofullscreen'],
 					"audioVolume": "vertical", // just like video player
 					"shuffle": false,
-					"continuous": true
+					"continuous": true,
+					"aspectratio": "16:9"
 				});
 
 				// regular video
 				$('video:not(.mep-playlist)').mediaelementplayer({
 					"features": ['playpause', 'current', 'progress', 'duration', 'tracks', 'volume', 'fullscreen'],
+					"aspectratio": "16:9"
 				});
 
 			});
