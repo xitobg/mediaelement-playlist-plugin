@@ -87,10 +87,11 @@
                 return;
             }
             var t = this;
-            var fullscreenBtn = $('<div class="mejs-button mejs-fullscreen-button">' + '<button type="button" aria-controls="' + t.id + '" title="' + t.options.fullscreenText + '" aria-label="' + t.options.fullscreenText + '"></button>' + "</div>");
-            fullscreenBtn.appendTo(controls);
-            if (t.media.pluginType === "native" || !t.options.usePluginFullScreen && !mejs.MediaFeatures.isFirefox) {
-                fullscreenBtn.click(function() {
+            t.fullscreenBtn = $('<div class="mejs-button mejs-fullscreen-button">' + '<button type="button" aria-controls="' + t.id + '" title="' + t.options.fullscreenText + '" aria-label="' + t.options.fullscreenText + '"></button>' + "</div>");
+            t.fullscreenBtn.appendTo(controls);
+            var noIOSFullscreen = !mejs.MediaFeatures.hasTrueNativeFullScreen && mejs.MediaFeatures.hasSemiNativeFullScreen && !t.media.webkitEnterFullscreen;
+            if (t.media.pluginType === "native" && !noIOSFullscreen || !t.options.usePluginFullScreen && !mejs.MediaFeatures.isFirefox) {
+                t.fullscreenBtn.click(function() {
                     var isFullScreen = mejs.MediaFeatures.hasTrueNativeFullScreen && mejs.MediaFeatures.isFullScreen() || player.isFullScreen;
                     if (isFullScreen) {
                         player.exitFullScreen();
@@ -100,7 +101,7 @@
                 });
             } else {
                 var fullscreenClass = "manual-fullscreen";
-                fullscreenBtn.click(function() {
+                t.fullscreenBtn.click(function() {
                     var isFullscreen = player.container.hasClass(fullscreenClass);
                     if (isFullscreen) {
                         $(document.body).removeClass(fullscreenClass);
@@ -157,7 +158,6 @@
                 } else {
                     console.error("Cannot determine if we can play this media (no canPlayType()) on" + $(this).toString());
                 }
-                sourceIsPlayable = $(this).parent()[0].player.media.canPlayType(this.type);
                 if (!foundMatchingType && (sourceIsPlayable === "maybe" || sourceIsPlayable === "probably")) {
                     foundMatchingType = this.type;
                 }
