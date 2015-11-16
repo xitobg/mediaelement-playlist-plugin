@@ -15,7 +15,7 @@ module.exports = function (grunt) {
 					beautify: true
 				},
 				files: {
-					'build/mediaelement-playlist-plugin.js': 'src/js/mediaelement-playlist-plugin.js'
+					'build/mediaelement-playlist-plugin.js': ['src/js/mediaelement-playlist-plugin.js', 'src/js/slidelayer.js']
 				}
 			},
 			build: {
@@ -26,7 +26,7 @@ module.exports = function (grunt) {
 					sourceMapIncludeSources: true
 				},
 				files: {
-					'build/mediaelement-playlist-plugin.min.js': 'src/js/mediaelement-playlist-plugin.js'
+					'build/mediaelement-playlist-plugin.min.js': ['src/js/mediaelement-playlist-plugin.js', 'src/js/slidelayer.js']
 				}
 			}
 		},
