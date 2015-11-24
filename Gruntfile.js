@@ -21,7 +21,9 @@ module.exports = function (grunt) {
 			build: {
 				options: {
 					mangle: true,
-					compress: true,
+					compress: {
+						warnings: true
+					},
 					sourceMap: true,
 					sourceMapIncludeSources: true
 				},
