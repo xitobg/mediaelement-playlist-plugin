@@ -155,6 +155,27 @@
 
 			var t = this;
 
+			if (mejs.MediaFeatures.hasTrueNativeFullScreen) {
+
+				// chrome doesn't alays fire this in an iframe
+				var func = function(e) {
+					if (player.isFullScreen) {
+						if (mejs.MediaFeatures.isFullScreen()) {
+							player.isNativeFullScreen = true;
+							// reset the controls once we are fully in full screen
+							player.setControlsSize();
+						} else {
+							player.isNativeFullScreen = false;
+							// when a user presses ESC
+							// make sure to put the player back into place
+							player.exitFullScreen();
+						}
+					}
+				};
+
+				player.globalBind(mejs.MediaFeatures.fullScreenEventName, func);
+			}
+
 			t.fullscreenBtn =
 				$('<div class="mejs-button mejs-fullscreen-button">' +
 					'<button type="button" aria-controls="' + t.id + '" title="' + t.options.fullscreenText + '" aria-label="' + t.options.fullscreenText + '"></button>' +

@@ -46,9 +46,11 @@
 				left: 0;
 				width: 100%;
 				height: 100%;
+
+				background-color: black;
 			}
 
-			.slide-layer {
+			.slide-layer-inner {
 				display: block;
 				box-sizing: border-box;
 				padding-bottom: 30px;
@@ -56,6 +58,23 @@
 				height: 100%;
 				position: relative;
 				top: 0;
+				box-sizing: border-box;
+			}
+
+			.slide-layer {
+				width: 100%;
+				height: 100%;
+				position: relative;
+				top: 0;
+			}
+
+			.slide-layer .img-wrap {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				top: 0;
+				margin-bottom: 30px;
+				box-sizing: border-box;
 			}
 
 			.slide-layer img {
@@ -286,7 +305,7 @@
 
 				// audio playlist
 				$('audio.mep-playlist-slides').mediaelementplayer({
-					"features": ['slidelayer', 'tracks', 'prevtrack', 'playpause', 'nexttrack', 'loop', 'shuffle', 'current', 'progress', 'duration', 'volume', 'playlist', 'audiofullscreen'],
+					"features": ['slidelayer', 'tracks', 'playlistfeature', 'prevtrack', 'playpause', 'nexttrack', 'loop', 'shuffle', 'current', 'progress', 'duration', 'volume', 'playlist', 'audiofullscreen'],
 					"audioVolume": "vertical", // just like video player
 					"shuffle": false,
 					"continuous": true,
