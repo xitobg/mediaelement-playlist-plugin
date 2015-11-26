@@ -50,9 +50,6 @@
   overflow-y: auto;
   background-size: 100%;
   width: 100%;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
   background-size: cover;
   background-position: 50% 50%;
@@ -60,9 +57,6 @@
 .mejs-container .mejs-playlist ul {
   margin: 0 0 30px 0;
   padding: 0;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 .mejs-container .mejs-playlist ul li {
@@ -126,7 +120,6 @@
   display: inline-block;
   width: 100%;
   will-change: transform;
-  transition: -webkit-transform 0.5s ease-in-out;
   transition: transform 0.5s ease-in-out;
   background-size: 100%;
   background-repeat: no-repeat;
@@ -184,9 +177,6 @@
   margin-top: -75px;
 }
 .mejs-container.mep-slider .mejs-playlist > a.mep-prev {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 .mejs-container.mep-slider .mejs-playlist > a.mep-prev:hover {
@@ -195,9 +185,6 @@
 .mejs-container.mep-slider .mejs-playlist > a.mep-next {
   right: 0;
   background-position: left -600px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 .mejs-container.mep-slider .mejs-playlist > a.mep-next:hover {
@@ -217,6 +204,50 @@ body.manual-fullscreen .mejs-container.manual-fullscreen {
   width: 100%;
   height: 100%;
   z-index: 100;
+}
+
+.slide-layer-outer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+}
+
+.slide-layer-inner {
+  display: block;
+  box-sizing: border-box;
+  padding-bottom: 30px;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  top: 0;
+  box-sizing: border-box;
+}
+
+.slide-layer {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  top: 0;
+}
+
+.slide-layer .img-wrap {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  margin-bottom: 30px;
+  box-sizing: border-box;
+}
+
+.slide-layer img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /*# sourceMappingURL=mediaelement-playlist-plugin.css.map */
