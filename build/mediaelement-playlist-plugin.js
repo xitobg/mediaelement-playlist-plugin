@@ -185,12 +185,14 @@
                             track.name = getTrackName(track.source);
                         }
                         track.poster = $(this).data("poster");
+                        track.slides = $(this).data("slides");
+                        track.slideslang = $(this).data("slides-lang");
                         tracks.push(track);
                     }
                 }
             });
             for (var track in tracks) {
-                var $thisLi = $('<li data-url="' + tracks[track].source + '" data-poster="' + tracks[track].poster + '" title="' + tracks[track].name + '"><span>' + tracks[track].name + "</span></li>");
+                var $thisLi = $('<li data-url="' + tracks[track].source + '" data-poster="' + tracks[track].poster + '" data-slides="' + tracks[track].slides + '" data-slides-lang="' + tracks[track].slideslang + '" title="' + tracks[track].name + '"><span>' + tracks[track].name + "</span></li>");
                 layers.find(".mejs-playlist > ul").append($thisLi);
                 if ($(player.media).hasClass("mep-slider")) {
                     $thisLi.css({
@@ -201,7 +203,9 @@
             player.videoSliderTracks = tracks.length;
             layers.find("li:first").addClass("current played");
             if (!player.isVideo) {
-                player.changePoster(layers.find("li:first").data("poster"));
+                var firstTrack = layers.find("li:first").first();
+                player.changePoster(firstTrack.data("poster"));
+                player.changeSlides(firstTrack.data("slides"), firstTrack.data("slides-lang"));
             }
             var $prevVid = $('<a class="mep-prev">'), $nextVid = $('<a class="mep-next">');
             player.videoSliderIndex = 0;
@@ -344,12 +348,29 @@
             t.setPoster(posterUrl);
             t.layers.find(".mejs-poster").show();
         },
+        changeSlides: function(slideUrl, slideLang) {
+            var t = this;
+            t.tracks = [];
+            t.tracks.push({
+                srclang: slideLang ? slideLang.toLowerCase() : "",
+                src: slideUrl,
+                kind: "slides",
+                label: "",
+                entries: [],
+                isLoaded: false
+            });
+            t.buildtracks(t, t.controls, t.layers, t.media);
+            var elm1 = t.controls.children().last();
+            var elm2 = t.controls.children().last().prev();
+            elm2.insertAfter(elm1);
+        },
         playTrack: function(track) {
             var t = this;
             t.pause();
             t.setSrc(track.data("url"));
             t.load();
             t.changePoster(track.data("poster"));
+            t.changeSlides(track.data("slides"), track.data("slides-lang"));
             t.play();
             track.addClass("current").siblings().removeClass("current");
         },
