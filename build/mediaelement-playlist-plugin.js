@@ -186,13 +186,14 @@
                         }
                         track.poster = $(this).data("poster");
                         track.slides = $(this).data("slides");
+                        track.slidesinline = $(this).data("slides-inline");
                         track.slideslang = $(this).data("slides-lang");
                         tracks.push(track);
                     }
                 }
             });
             for (var track in tracks) {
-                var $thisLi = $('<li data-url="' + tracks[track].source + '" data-poster="' + tracks[track].poster + '" data-slides="' + tracks[track].slides + '" data-slides-lang="' + tracks[track].slideslang + '" title="' + tracks[track].name + '"><span>' + tracks[track].name + "</span></li>");
+                var $thisLi = $('<li data-url="' + tracks[track].source + '" data-poster="' + tracks[track].poster + (!tracks[track].slides ? "" : '" data-slides="' + tracks[track].slides) + (!tracks[track].slidesinline ? "" : '" data-slides-inline="' + tracks[track].slidesinline) + (!tracks[track].slideslang ? "" : '" data-slides-lang="' + tracks[track].slideslang) + '" title="' + tracks[track].name + '"><span>' + tracks[track].name + "</span></li>");
                 layers.find(".mejs-playlist > ul").append($thisLi);
                 if ($(player.media).hasClass("mep-slider")) {
                     $thisLi.css({
@@ -205,7 +206,7 @@
             if (!player.isVideo) {
                 var firstTrack = layers.find("li:first").first();
                 player.changePoster(firstTrack.data("poster"));
-                player.changeSlides(firstTrack.data("slides"), firstTrack.data("slides-lang"));
+                player.changeSlides(firstTrack.data("slides"), firstTrack.data("slides-inline"), firstTrack.data("slides-lang"));
             }
             var $prevVid = $('<a class="mep-prev">'), $nextVid = $('<a class="mep-next">');
             player.videoSliderIndex = 0;
@@ -348,12 +349,13 @@
             t.setPoster(posterUrl);
             t.layers.find(".mejs-poster").show();
         },
-        changeSlides: function(slideUrl, slideLang) {
+        changeSlides: function(slideUrl, slideInline, slideLang) {
             var t = this;
             t.tracks = [];
             t.tracks.push({
-                srclang: slideLang ? slideLang.toLowerCase() : "",
+                srclang: !slideLang ? undefined : slideLang.toLowerCase(),
                 src: slideUrl,
+                inline: slideInline,
                 kind: "slides",
                 label: "",
                 entries: [],
@@ -370,7 +372,7 @@
             t.setSrc(track.data("url"));
             t.load();
             t.changePoster(track.data("poster"));
-            t.changeSlides(track.data("slides"), track.data("slides-lang"));
+            t.changeSlides(track.data("slides"), track.data("slides-inline"), track.data("slides-lang"));
             t.play();
             track.addClass("current").siblings().removeClass("current");
         },
@@ -402,8 +404,64 @@
             this.isVideo = true;
             this.oldSetPlayerSize(width, height);
             this.isVideo = oldIsVideo;
+        },
+        oldLoadTrack: MediaElementPlayer.prototype.loadTrack,
+        loadTrack: function(index) {
+            var track = this.tracks[index];
+            if (!track.inline) {
+                this.oldLoadTrack(index);
+            } else {
+                var t = this, track = t.tracks[index];
+                track.entries = mejs.InlineParser.parse(track.inline);
+                track.isLoaded = true;
+                t.enableTrackButton(track.srclang, track.label);
+                t.loadNextTrack();
+                t.setupSlides(track);
+            }
         }
     });
+    mejs.InlineParser = {
+        parse: function(inlineText) {
+            try {
+                var inlineRe = new RegExp("(\\d{2}):(\\d{2}):(\\d{2}) ([^;]+)", "g");
+                var inlineResult, inlineResults = [];
+                while (inlineResult = inlineRe.exec(inlineText)) {
+                    inlineResults.push(inlineResult);
+                }
+                var entries = inlineResults.map(function(entry, eindex) {
+                    var seconds = parseInt(entry[1]) * 60 * 60 + parseInt(entry[2]) * 60 + parseInt(entry[3]);
+                    var secondsFixed = Math.max(seconds, .02);
+                    return {
+                        text: entry[4],
+                        times: {
+                            identifier: eindex,
+                            start: secondsFixed,
+                            stop: null,
+                            settings: ""
+                        }
+                    };
+                });
+                var allEntries = entries.reduce(function(a, b, c, d) {
+                    return {
+                        text: a.text.concat(b.text),
+                        times: a.times.concat(b.times)
+                    };
+                }, {
+                    text: [],
+                    times: []
+                });
+                allEntries.times = allEntries.times.map(function(entry, eindex, arr) {
+                    return {
+                        identifier: entry.identifier,
+                        start: entry.start,
+                        stop: eindex < arr.length - 1 ? arr[eindex + 1].start : Number.MAX_SAFE_INTEGER,
+                        settings: entry.settings
+                    };
+                });
+                return allEntries;
+            } catch (e) {}
+        }
+    };
 })(mejs.$);
 
 (function($) {
