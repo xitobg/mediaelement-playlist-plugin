@@ -589,13 +589,14 @@
 	mejs.InlineParser = {
 		parse: function(inlineText) {
 			try {
-				var inlineRe = new RegExp("(\\d{2}):(\\d{2}):(\\d{2}) ([^;]+)", "g");
+				var inlineRe = new RegExp("(\\d{2}):(\\d{2}):(\\d{2})\\s+([^;]+)", "g");
 				var inlineResult, inlineResults = [];
 
                 while ((inlineResult = inlineRe.exec(inlineText))) {
                     inlineResults.push(inlineResult)
                 }
 
+				// Make assoc array with text & times.
                 var entries = inlineResults.map(function(entry, eindex){
                     var seconds = parseInt(entry[1]) * 60 * 60
                         + parseInt(entry[2]) * 60
@@ -613,10 +614,14 @@
                     }
 
                 });
-				var allEntries = entries.reduce(function(a, b, c, d){
+
+				// Break array into 2 arrays.
+				var allEntries = entries.reduce(function(a, b){
 					return { text: a.text.concat(b.text),
 					times: a.times.concat(b.times) };
 				}, {text: [], times: []});
+
+				// Set stop times.
 				allEntries.times = allEntries.times.map(function(entry, eindex, arr){
 					return {
                             identifier: entry.identifier,

@@ -423,7 +423,7 @@
     mejs.InlineParser = {
         parse: function(inlineText) {
             try {
-                var inlineRe = new RegExp("(\\d{2}):(\\d{2}):(\\d{2}) ([^;]+)", "g");
+                var inlineRe = new RegExp("(\\d{2}):(\\d{2}):(\\d{2})\\s+([^;]+)", "g");
                 var inlineResult, inlineResults = [];
                 while (inlineResult = inlineRe.exec(inlineText)) {
                     inlineResults.push(inlineResult);
@@ -441,7 +441,7 @@
                         }
                     };
                 });
-                var allEntries = entries.reduce(function(a, b, c, d) {
+                var allEntries = entries.reduce(function(a, b) {
                     return {
                         text: a.text.concat(b.text),
                         times: a.times.concat(b.times)
