@@ -193,7 +193,8 @@
                 }
             });
             for (var track in tracks) {
-                var $thisLi = $('<li data-url="' + tracks[track].source + '" data-poster="' + tracks[track].poster + (!tracks[track].slides ? "" : '" data-slides="' + tracks[track].slides) + (!tracks[track].slidesinline ? "" : '" data-slides-inline="' + tracks[track].slidesinline) + (!tracks[track].slideslang ? "" : '" data-slides-lang="' + tracks[track].slideslang) + '" title="' + tracks[track].name + '"><span>' + tracks[track].name + "</span></li>");
+                var $thisLi = $('<li data-url="' + tracks[track].source + '" data-poster="' + tracks[track].poster + (!tracks[track].slides ? "" : '" data-slides="' + tracks[track].slides) + (!tracks[track].slideslang ? "" : '" data-slides-lang="' + tracks[track].slideslang) + '" title="' + tracks[track].name + '"><span>' + tracks[track].name + "</span></li>");
+                $thisLi.data("slides-inline", tracks[track].slidesinline);
                 layers.find(".mejs-playlist > ul").append($thisLi);
                 if ($(player.media).hasClass("mep-slider")) {
                     $thisLi.css({
@@ -423,16 +424,14 @@
     mejs.InlineParser = {
         parse: function(inlineText) {
             try {
-                var inlineRe = new RegExp("(\\d{2}):(\\d{2}):(\\d{2})\\s+([^;]+)", "g");
-                var inlineResult, inlineResults = [];
-                while (inlineResult = inlineRe.exec(inlineText)) {
-                    inlineResults.push(inlineResult);
-                }
+                var inlineResults = inlineText.map(function(en) {
+                    return en[0].split(":").concat([ en[1] ]);
+                });
                 var entries = inlineResults.map(function(entry, eindex) {
-                    var seconds = parseInt(entry[1]) * 60 * 60 + parseInt(entry[2]) * 60 + parseInt(entry[3]);
+                    var seconds = parseInt(entry[0]) * 60 * 60 + parseInt(entry[1]) * 60 + parseInt(entry[2]);
                     var secondsFixed = Math.max(seconds, .02);
                     return {
-                        text: entry[4],
+                        text: entry[3],
                         times: {
                             identifier: eindex,
                             start: secondsFixed,
