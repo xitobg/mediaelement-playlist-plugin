@@ -374,7 +374,7 @@
             t.setSrc(track.data("url"));
             t.load();
             t.changePoster(track.data("poster"));
-            t.changeSlides(track.data("slides"), track.data("slides-inline"), track.data("slides-lang"));
+            t.changeSlides(track.data("slides"), track.data("slides-inline"), track.data("slides-lang"), track.data("poster"));
             t.play();
             track.addClass("current").siblings().removeClass("current");
         },
@@ -410,11 +410,11 @@
         oldLoadTrack: MediaElementPlayer.prototype.loadTrack,
         loadTrack: function(index) {
             var track = this.tracks[index];
-            if (!track.inline) {
+            if (false && !track.inline) {
                 this.oldLoadTrack(index);
             } else {
-                var t = this, track = t.tracks[index];
-                track.entries = mejs.InlineParser.parse(track.inline, track.poster);
+                var t = this;
+                track.entries = mejs.InlineParser.parse(track.inline ? track.inline : [], track.poster);
                 track.isLoaded = true;
                 t.enableTrackButton(track.srclang, track.label);
                 t.loadNextTrack();
@@ -496,6 +496,11 @@
         showSlide: function(index) {
             if (typeof this.tracks == "undefined" || typeof this.slidesContainer == "undefined") {
                 return;
+            }
+            if (this.slides.entries.text.length > 0 && this.slides.entries.imgs.length > 0) {
+                this.slidesContainer.show();
+            } else {
+                this.slidesContainer.hide();
             }
             var t = this, url = t.slides.entries.text[index], img = t.slides.entries.imgs[index];
             if (typeof img == "undefined" || typeof img.fadeIn == "undefined") {

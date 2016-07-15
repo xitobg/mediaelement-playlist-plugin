@@ -20,6 +20,14 @@
                 return;
             }
 
+            //
+            if(this.slides.entries.text.length > 0 && this.slides.entries.imgs.length > 0) {
+                this.slidesContainer.show();
+            }
+            else {
+                this.slidesContainer.hide();
+            }
+
             var t = this,
                 url = t.slides.entries.text[index],
                 img = t.slides.entries.imgs[index];
