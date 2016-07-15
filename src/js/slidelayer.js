@@ -39,9 +39,9 @@
                 img.on('load', function() {
                     wrapper.appendTo(t.slidesContainer)
                         .hide()
-                        .fadeIn()
+                        .fadeIn(100)
                         .siblings(':visible')
-                        .fadeOut();
+                        .fadeOut(100);
 
                 });
                 t.slides.entries.imgs[index] = wrapper
@@ -52,9 +52,9 @@
 
                     //
 
-                    img.fadeIn()
+                    img.fadeIn(100)
                         .siblings(':visible')
-                        .fadeOut();
+                        .fadeOut(100);
                 }
             }
 
