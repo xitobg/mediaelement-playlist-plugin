@@ -207,7 +207,7 @@
             if (!player.isVideo) {
                 var firstTrack = layers.find("li:first").first();
                 player.changePoster(firstTrack.data("poster"));
-                player.changeSlides(firstTrack.data("slides"), firstTrack.data("slides-inline"), firstTrack.data("slides-lang"));
+                player.changeSlides(firstTrack.data("slides"), firstTrack.data("slides-inline"), firstTrack.data("slides-lang"), firstTrack.data("poster"));
             }
             var $prevVid = $('<a class="mep-prev">'), $nextVid = $('<a class="mep-next">');
             player.videoSliderIndex = 0;
@@ -350,13 +350,14 @@
             t.setPoster(posterUrl);
             t.layers.find(".mejs-poster").show();
         },
-        changeSlides: function(slideUrl, slideInline, slideLang) {
+        changeSlides: function(slideUrl, slideInline, slideLang, poster) {
             var t = this;
             t.tracks = [];
             t.tracks.push({
                 srclang: !slideLang ? undefined : slideLang.toLowerCase(),
                 src: slideUrl,
                 inline: slideInline,
+                poster: poster,
                 kind: "slides",
                 label: "",
                 entries: [],
@@ -413,7 +414,7 @@
                 this.oldLoadTrack(index);
             } else {
                 var t = this, track = t.tracks[index];
-                track.entries = mejs.InlineParser.parse(track.inline);
+                track.entries = mejs.InlineParser.parse(track.inline, track.poster);
                 track.isLoaded = true;
                 t.enableTrackButton(track.srclang, track.label);
                 t.loadNextTrack();
@@ -422,24 +423,37 @@
         }
     });
     mejs.InlineParser = {
-        parse: function(inlineText) {
+        parse: function(inlineText, poster) {
             try {
                 var inlineResults = inlineText.map(function(en) {
                     return en[0].split(":").concat([ en[1] ]);
                 });
-                var entries = inlineResults.map(function(entry, eindex) {
+                var entries = [];
+                var offset = 0;
+                if (poster) {
+                    entries = [ {
+                        text: poster,
+                        times: {
+                            identifier: 0,
+                            start: 0,
+                            stop: null,
+                            settings: ""
+                        }
+                    } ];
+                }
+                entries = entries.concat(inlineResults.map(function(entry, eindex) {
                     var seconds = parseInt(entry[0]) * 60 * 60 + parseInt(entry[1]) * 60 + parseInt(entry[2]);
                     var secondsFixed = Math.max(seconds, .02);
                     return {
                         text: entry[3],
                         times: {
-                            identifier: eindex,
+                            identifier: eindex + offset,
                             start: secondsFixed,
                             stop: null,
                             settings: ""
                         }
                     };
-                });
+                }));
                 var allEntries = entries.reduce(function(a, b) {
                     return {
                         text: a.text.concat(b.text),
@@ -458,7 +472,9 @@
                     };
                 });
                 return allEntries;
-            } catch (e) {}
+            } catch (e) {
+                console.error("Error parsing inlineText: " + inlineText);
+            }
         }
     };
 })(mejs.$);
