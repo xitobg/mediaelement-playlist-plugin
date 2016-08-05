@@ -320,6 +320,7 @@
                 t.playTrack(nxt);
                 t.options.loop = t.options.loopplaylist || t.options.continuous && !atEnd;
             }
+            t.setControlsSize();
         },
         playPrevTrack: function() {
             var t = this, prev;
@@ -343,6 +344,7 @@
                 current.removeClass("played");
                 t.playTrack(prev);
             }
+            t.setControlsSize();
         },
         changePoster: function(posterUrl) {
             var t = this;
@@ -384,6 +386,7 @@
             var tracks = t.layers.find(".mejs-playlist > ul > li");
             var track = tracks.filter('[data-url="' + url + '"]');
             t.playTrack(track);
+            t.setControlsSize();
         },
         togglePlaylistDisplay: function(player, layers, media, showHide) {
             var t = this;
@@ -421,6 +424,7 @@
                 t.loadNextTrack();
                 t.setupSlides(track);
             }
+            t.setControlsSize();
         }
     });
     mejs.InlineParser = {
@@ -502,7 +506,9 @@
             });
         },
         resetSlides: function() {
-            this.slidesContainer.empty();
+            if (this.slidesContainer) {
+                this.slidesContainer.empty();
+            }
         },
         showSlide: function(index) {
             if (typeof this.tracks == "undefined" || typeof this.slidesContainer == "undefined") {
