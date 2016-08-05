@@ -591,7 +591,14 @@
 		parse: function(inlineText, poster) {
 			try {
                 var inlineResults = inlineText.map(function (en) {
-					return en[0].split(":").concat([en[1]]);
+                    var split = en[0].split(":");
+					if(split.length == 1) {
+						split = ["0"].concat(split);
+					}
+					if(split.length == 2) {
+						split = ["0"].concat(split);
+					}
+					return split.concat([en[1]]);
 				});
 
                 var entries = [];

@@ -426,7 +426,14 @@
         parse: function(inlineText, poster) {
             try {
                 var inlineResults = inlineText.map(function(en) {
-                    return en[0].split(":").concat([ en[1] ]);
+                    var split = en[0].split(":");
+                    if (split.length == 1) {
+                        split = [ "0" ].concat(split);
+                    }
+                    if (split.length == 2) {
+                        split = [ "0" ].concat(split);
+                    }
+                    return split.concat([ en[1] ]);
                 });
                 var entries = [];
                 var offset = 0;
@@ -507,12 +514,12 @@
                 var wrapper = $('<div class="img-wrap"><img src="' + url + '"></div>');
                 img = wrapper.find("img").first();
                 img.on("load", function() {
-                    wrapper.appendTo(t.slidesContainer).hide().fadeIn().siblings(":visible").fadeOut();
+                    wrapper.appendTo(t.slidesContainer).hide().fadeIn(100).siblings(":visible").fadeOut(100);
                 });
                 t.slides.entries.imgs[index] = wrapper;
             } else {
                 if (!img.is(":visible") && !img.is(":animated")) {
-                    img.fadeIn().siblings(":visible").fadeOut();
+                    img.fadeIn(100).siblings(":visible").fadeOut(100);
                 }
             }
         }
