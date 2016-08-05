@@ -15,6 +15,11 @@
                 slideLayer.css("width", "");
             });
         },
+        resetSlides: function() {
+            if(this.slidesContainer) {
+                this.slidesContainer.empty()
+            }
+        },
         showSlide: function(index) {
             if (typeof this.tracks == 'undefined' || typeof this.slidesContainer == 'undefined') {
                 return;

@@ -374,6 +374,7 @@
             t.setSrc(track.data("url"));
             t.load();
             t.changePoster(track.data("poster"));
+            t.resetSlides();
             t.changeSlides(track.data("slides"), track.data("slides-inline"), track.data("slides-lang"), track.data("poster"));
             t.play();
             track.addClass("current").siblings().removeClass("current");
@@ -499,6 +500,9 @@
                 slideLayer.css("height", "");
                 slideLayer.css("width", "");
             });
+        },
+        resetSlides: function() {
+            this.slidesContainer.empty();
         },
         showSlide: function(index) {
             if (typeof this.tracks == "undefined" || typeof this.slidesContainer == "undefined") {
