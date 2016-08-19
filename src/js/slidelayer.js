@@ -9,10 +9,44 @@
             $(document).on('webkitfullscreenchange mozfullscreenchange fullscreenchange MSFullscreenChange', function() {
                 slideLayer.css("height", "");
                 slideLayer.css("width", "");
+
+                slideLayer.find(".slide-layer .img-wrap").each(function(i, outer) {
+                    var outerRatio = outer.width / outer.height;
+                    outer.childNodes.forEach(function(inner) {
+                        var innerRatio = inner.width / inner.height;
+                        if(innerRatio > outerRatio) {
+                            // Img is wider than player
+                            inner.style.width = "100%";
+                            inner.style.height = null;
+                        }
+                        else {
+                            // Player is wider than img.
+                            inner.style.height = "100%";
+                            inner.style.width = null;
+                        }
+                    })
+                });
             });
             player.on('resize', function() {
                 slideLayer.css("height", "");
                 slideLayer.css("width", "");
+
+                slideLayer.find(".slide-layer .img-wrap").each(function(i, outer) {
+                    var outerRatio = outer.width / outer.height;
+                    outer.childNodes.forEach(function(inner) {
+                        var innerRatio = inner.width / inner.height;
+                        if(innerRatio > outerRatio) {
+                            // Img is wider than player
+                            inner.style.width = "100%";
+                            inner.style.height = null;
+                        }
+                        else {
+                            // Player is wider than img.
+                            inner.style.height = "100%";
+                            inner.style.width = null;
+                        }
+                    })
+                });
             });
         },
         resetSlides: function() {
